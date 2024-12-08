@@ -1,6 +1,5 @@
 import React from 'react';
 import bg from '@/assets/imgs/ShopHero.jpg';
-import Breadcrumbs from './Breadcrumbs';
 import { IoIosArrowForward } from "react-icons/io";
 import Image from 'next/image';
 import logo from '@/assets/imgs/logo.png'

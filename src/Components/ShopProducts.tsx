@@ -1,9 +1,7 @@
 'use client';
-
 import React, { useState } from 'react';
 import Allproducts from '@/assets/data/AllProducts';
 import Card from './Card';
-import Services from './Services';
 import { FaFilter } from "react-icons/fa";
 import { BsGrid3X3, BsListUl } from "react-icons/bs";
 

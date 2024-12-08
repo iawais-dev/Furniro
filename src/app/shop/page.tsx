@@ -1,7 +1,6 @@
 import Footer from '@/Components/Footer'
 import ShopHero from '@/Components/HeroShop'
 import Navbar from '@/Components/Navbar'
-import ReuseableHero from '@/Components/ReuseableHero'
 import Services from '@/Components/Services'
 import ShopProducts from '@/Components/ShopProducts'
 import React from 'react'

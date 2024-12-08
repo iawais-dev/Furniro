@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { useCart } from '@/contexts/CartContext';
 
 const Checkout = () => {
-    const { cart, addToCart, removeFromCart, updateQuantity } = useCart(); // Get cart data from context
+    const { cart, removeFromCart} = useCart(); // Get cart data from context
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',

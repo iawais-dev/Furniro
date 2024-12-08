@@ -28,13 +28,6 @@ const images = [
     subtitle: "Living Room",
   },
 ];
-const slideStyles = {
-  position: 'absolute',
-  width: '100%',
-  height: '100%',
-  transition: 'transform 0.5s ease-in-out',
-};
-
 
 
 function ImageSlider() {
