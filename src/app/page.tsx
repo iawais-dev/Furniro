@@ -3,6 +3,7 @@ import Footer from "@/Components/Footer";
 import Hero from "@/Components/Hero";
 import Navbar from "@/Components/Navbar";
 import Product_listing from "@/Components/Product_listing";
+import Products from "@/Components/Products";
 import Promotion from "@/Components/Promo";
 import YourSetup from "@/Components/YourSetup";
 
@@ -13,6 +14,7 @@ export default function Home() {
       <Hero/>
       <Categories/>
       <Product_listing/>
+      <Products/>
       <Promotion/>
       <YourSetup/>
       <Footer/>

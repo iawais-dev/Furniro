@@ -71,7 +71,7 @@ export default function Navbar() {
           <div className="flex w-fit mt-10 mx-auto  gap-10">
             <Image src={profile} className="w-[20px]" alt="profile" />
             <Image src={heart} className="w-[20px]" alt="heart" />
-            <Image src={cart} className="w-[20px]" alt="cart" />
+            <Link href='/cart'> <Image src={cart} className="w-[20px]" alt="cart" /> </Link>
           </div> </div>: null
           }
        
