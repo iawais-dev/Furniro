@@ -13,7 +13,7 @@ export default function Hero() {
             Discover Our New Collection
           </h1>
           <p className="text-[#333333] font-medium lg:text-[18px] mt-4">
-            perfect furniture to match your style.
+            Find the perfect furniture to match your style.
           </p>
           <button className="mt-6 py-[10px] px-[40px] lg:py-[25px] lg:px-[72px] bg-[#B88E2F] text-white text-[16px] font-bold transition-all hover:bg-[#a5802a]">
             Buy Now

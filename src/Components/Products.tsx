@@ -7,10 +7,9 @@ import { IoMdShare } from 'react-icons/io';
 import compare from '@/assets/imgs/compare.svg';
 
 const sanity = sanityClient({
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
+  projectId: "j2bjwxq6",
   dataset: 'production',
   apiVersion: '2023-01-01',
-  token: process.env.SANITY_API_TOKEN,
   useCdn: true,
 });
 
