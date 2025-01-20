@@ -14,7 +14,6 @@ export default function Product_listing() {
             title={product.title}
             description={product.description}
             new_price={product.new_price}
-            old_price={product.old_price}
             new_product={product.new_product}
           />
         ))}

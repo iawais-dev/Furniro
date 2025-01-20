@@ -1,3 +1,5 @@
+import Link from "next/link"
+
 export default function Footer() {
     return (
       <footer className=" py-8 lg:py-20 p-10 overflow-hidden">
@@ -10,10 +12,10 @@ export default function Footer() {
          <div className="flex flex-wrap lg:flex-nowrap mt-10 lg:mt-0 gap-10 sm:gap-20 xl:gap-32"> <div>
             <h4 className="font-medium text-[#9F9F9F] text-[16px]">Links</h4>
             <ul className="space-y-6  mt-10">
-              <li>Home</li>
-              <li>Shop</li>
-              <li>About</li>
-              <li>Contact</li>
+              <Link href='/'><li>Home</li></Link>
+              <Link href='/shop'><li>Shop</li></Link>
+              <Link href='/blogs'><li>blog</li></Link>
+              <Link href='/contact'><li>Contact</li></Link>
             </ul>
           </div>
           <div>

@@ -1,65 +1,88 @@
 'use client';
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+
 import { StaticImageData } from 'next/image';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 
 interface CartItem {
-  id: number;
-  image: string | StaticImageData;
-  label: string;
+  id: string;
   title: string;
-  description: string;
-  new_price: string;
-  old_price: string | null;
+  image: string | StaticImageData;
+  new_price: number;
   quantity: number;
-  name: string;
 }
 
-interface CartContextType {
+interface CartContextProps {
   cart: CartItem[];
   addToCart: (item: CartItem) => void;
-  removeFromCart: (id: number) => void;
-  updateQuantity: (id: number, quantity: number) => void;
+  removeFromCart: (id: string) => void;
+  updateQuantity: (id: string, quantity: number) => void;
   calculateTotal: () => number;
 }
 
-const CartContext = createContext<CartContextType | undefined>(undefined);
+const CartContext = createContext<CartContextProps | undefined>(undefined);
 
-export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [cart, setCart] = useState<CartItem[]>([]);
+  const [isHydrated, setIsHydrated] = useState(false); 
+
+  useEffect(() => {
+    const storedCart = localStorage.getItem('cart');
+    setCart(storedCart ? JSON.parse(storedCart) : []);
+    setIsHydrated(true); 
+  }, []);
+
+  useEffect(() => {
+    if (isHydrated) {
+      localStorage.setItem('cart', JSON.stringify(cart));
+    }
+  }, [cart, isHydrated]);
 
   const addToCart = (item: CartItem) => {
     setCart((prevCart) => {
-      const existingItem = prevCart.find((i) => i.id === item.id);
+      const existingItem = prevCart.find((cartItem) => cartItem.id === item.id);
       if (existingItem) {
-        return prevCart.map((i) =>
-          i.id === item.id ? { ...i, quantity: i.quantity + item.quantity } : i
+        return prevCart.map((cartItem) =>
+          cartItem.id === item.id
+            ? { ...cartItem, quantity: cartItem.quantity + item.quantity }
+            : cartItem
         );
       }
       return [...prevCart, item];
     });
   };
 
-  const removeFromCart = (id: number) => {
+  const removeFromCart = (id: string) => {
     setCart((prevCart) => prevCart.filter((item) => item.id !== id));
   };
 
-  const updateQuantity = (id: number, quantity: number) => {
+  const updateQuantity = (id: string, quantity: number) => {
     setCart((prevCart) =>
-      prevCart.map((item) => (item.id === id ? { ...item, quantity } : item))
+      prevCart.map((item) =>
+        item.id === id ? { ...item, quantity } : item
+      )
     );
   };
 
-  const calculateTotal = () =>
-    cart.reduce((total, item) => total + parseFloat(item.new_price) * item.quantity, 0);
+  const calculateTotal = () => {
+    return cart.reduce((total, item) => total + item.new_price * item.quantity, 0);
+  };
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, removeFromCart, updateQuantity, calculateTotal }}>
-      {children}
+    <CartContext.Provider
+      value={{
+        cart,
+        addToCart,
+        removeFromCart,
+        updateQuantity,
+        calculateTotal,
+      }}
+    >
+      {isHydrated && children}
     </CartContext.Provider>
   );
 };
 
-export const useCart = () => {
+export const useCart = (): CartContextProps => {
   const context = useContext(CartContext);
   if (!context) {
     throw new Error('useCart must be used within a CartProvider');

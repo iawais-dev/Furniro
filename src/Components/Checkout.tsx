@@ -1,6 +1,4 @@
-// pages/index.tsx
 'use client';
-
 import { useState } from 'react';
 import { useCart } from '@/contexts/CartContext';
 
@@ -23,7 +21,7 @@ const Checkout = () => {
     // Calculate cart subtotal
     const calculateTotal = () => {
         return cart.reduce(
-            (total, item) => total + parseFloat(item.new_price) * item.quantity,
+            (total, item) => total + item.new_price * item.quantity,
             0
         );
     };
@@ -43,7 +41,7 @@ const Checkout = () => {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center">
+        <div className=" flex items-center justify-center">
             <div className="bg-white p-8 max-w-7xl w-full">
                 <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {/* Billing Details */}
@@ -174,7 +172,7 @@ const Checkout = () => {
                                 <ul className="list-disc pl-5 mb-4">
                                     {cart.map((item) => (
                                         <li key={item.id}>
-                                            {item.name} x {item.quantity}
+                                            {item.title} x {item.quantity}
                                         </li>
                                     ))}
                                 </ul>

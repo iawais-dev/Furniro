@@ -10,83 +10,75 @@ import prod8 from '@/assets/imgs/prod8.jpg'
 
 const products = [
     {
-      id: 1, // Unique ID for each product
+      id: "1", 
       image: prod1,
-      label: "30%",  // Discount percentage
+      label: 30,  
       title: "Syltherine",
       description: "Stylish cafe chair",
-      new_price: "2.500.000",
-      old_price: "3.500.000",
-      new_product: false,  // For marking "New" products
+      new_price: 2500,
+      new_product: false, 
     },
     {
-      id: 2, // Unique ID for each product
+      id: "2", 
       image: prod2,
-      label: "",  // CTA label
+      label: 0, 
       title: "Leviosa",
       description: "Stylish cafe chair",
-      new_price: "2.500.000",
-      old_price: null,
-      new_product: false,  // This is a new product
+      new_price: 2500,
+      new_product: false,  
     },
     {
-      id: 3, // Unique ID for each product
+      id: "3",
       image: prod3,
-      label: "-50%",  // Discount percentage
+      label: 50,  
       title: "Lolito",
       description: "Luxury big sofa",
-      new_price: "7.000.000",
-      old_price: "14.000.000",
+      new_price: 7000,
       new_product: false,
     },
     {
-      id: 4, // Unique ID for each product
+      id: "4",
       image: prod4,
-      label: "New",  // Label indicating this product is new
+      label: 0,  
       title: "Respira",
       description: "Outdoor bar table and stool",
-      new_price: "500.000",
-      old_price: null,
-      new_product: true,  // This is a new product
+      new_price: 500,
+      new_product: true,  
     },
     {
-      id: 5, // Unique ID for each product
+      id: "5", 
       image: prod5,
-      label: "",  // Discount
+      label: 0,  
       title: "Grifo",
       description: "Night lamp",
-      new_price: "1.500.000",
-      old_price: "2.000.000",
+      new_price: 1500,
       new_product: false,
     },
     {
-      id: 6, // Unique ID for each product
+      id: "6", 
       image: prod6,
-      label: "New",  // New product label
+      label: 0,  
       title: "Muggo",
       description: "Small mug",
-      new_price: "150.000",
-      old_price: null,
+      new_price: 1500,
       new_product: true,
     },
     {
-      id: 7, // Unique ID for each product
+      id: "7",
       image: prod7,
-      label: "-50%",  // New product label
+      label: 50,  
       title: "Pingky",
       description: "Cute bed set",
-      new_price: "7.000.000",
-      old_price: "14.000.000",
+      new_price: 7000,
       new_product: false,
     },
     {
-      id: 8, // Unique ID for each product
+      id: "8", 
       image: prod8,
-      label: "New",  // New product label
+      label: 0, 
       title: "Potty",
       description: "Minimalist flower pot",
-      new_price: "500.000",
-      old_price: null,
+      new_price: 500,
       new_product: true,
     }
 ];
