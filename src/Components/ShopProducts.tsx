@@ -11,6 +11,7 @@ const sanity = sanityClient({
   apiVersion: '2023-01-01',
   useCdn: true,
 });
+
 interface Product {
   _id: string;
   title: string;
@@ -27,17 +28,15 @@ interface Product {
   tags: string[];
 }
 
-
-
 function ShopProducts() {
-  const [itemsPerPage, setItemsPerPage] = useState(8);  // Default items per page
+  const [itemsPerPage, setItemsPerPage] = useState(8); // Default items per page
   const [currentPage, setCurrentPage] = useState(1);
   const [products, setProducts] = useState<Product[]>([]);
-  const [search, setSearch]=useState('');
+  const [search, setSearch] = useState('');
+  const [sortMethod, setSortMethod] = useState<string>('default'); // New state for sort method
 
   // Calculate total pages
   const totalPages = Math.ceil(products.length / itemsPerPage);
-
 
   const fetchProducts = async () => {
     try {
@@ -50,23 +49,38 @@ function ShopProducts() {
         discountPercentage,
         "imageUrl": productImage.asset->url,
         tags
-      }`
-      const data = await sanity.fetch(query)
-      setProducts(data)
-
+      }`;
+      const data = await sanity.fetch(query);
+      setProducts(data);
     } catch (error) {
-      console.log('error in loading images', error)
+      console.log('Error fetching products:', error);
     }
-  }
-  useEffect(() => {
-    fetchProducts()
-  }, [])
+  };
 
-  const filteredProducts = products.filter((product) =>
-    product.title.toLowerCase().includes(search.toLowerCase()) ||
-    product.description.toLowerCase().includes(search.toLowerCase()) ||
-    product.tags.some(tag => tag.toLowerCase().includes(search.toLowerCase()))
-  );
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  const filteredProducts = products
+    .filter((product) =>
+      product.title.toLowerCase().includes(search.toLowerCase()) ||
+      product.description.toLowerCase().includes(search.toLowerCase()) ||
+      product.tags.some(tag => tag.toLowerCase().includes(search.toLowerCase()))
+    )
+    .sort((a, b) => {
+      switch (sortMethod) {
+        case 'price-asc':
+          return a.price - b.price; // Low to High
+        case 'price-desc':
+          return b.price - a.price; // High to Low
+        case 'title-asc':
+          return a.title.localeCompare(b.title); // Alphabetical A-Z
+        case 'title-desc':
+          return b.title.localeCompare(a.title); // Alphabetical Z-A
+        default:
+          return 0; 
+      }
+    });
 
   const paginatedProducts = filteredProducts.slice(
     (currentPage - 1) * itemsPerPage,
@@ -80,14 +94,12 @@ function ShopProducts() {
     setCurrentPage(1);
   };
 
-
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
+
   const startItem = (currentPage - 1) * itemsPerPage + 1;
-  const endItem = Math.min(startItem + itemsPerPage - 1, products.length);
-
-
+  const endItem = Math.min(startItem + itemsPerPage - 1, filteredProducts.length);
 
   return (
     <div className="overflow-hidden">
@@ -116,14 +128,20 @@ function ShopProducts() {
 
           {/* Results Info */}
           <span className="text-sm mt-2 sm:mt-0">
-            Showing {startItem}-{endItem} of {products.length} results
+            Showing {startItem}-{endItem} of {filteredProducts.length} results
           </span>
         </div>
 
         {/* Right Section */}
         <div className="flex flex-col sm:flex-row items-center space-x-0 sm:space-x-2">
           <div>
-            <input type="text" placeholder='search' value={search} onChange={(e) => setSearch(e.target.value)} className='outline-none py-2 px-4' />
+            <input
+              type="text"
+              placeholder="Search"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className="outline-none py-2 px-4"
+            />
           </div>
           <div className="flex items-center mb-4 sm:mb-0">
             <label className="mr-2">Show</label>
@@ -144,30 +162,32 @@ function ShopProducts() {
             <select
               id="sort"
               className="p-1 border rounded-md text-sm bg-white"
+              value={sortMethod}
+              onChange={(e) => setSortMethod(e.target.value)}
             >
               <option value="default">Default</option>
               <option value="price-asc">Price: Low to High</option>
               <option value="price-desc">Price: High to Low</option>
-              <option value="rating">Rating</option>
+              <option value="title-asc">Title: A-Z</option>
+              <option value="title-desc">Title: Z-A</option>
             </select>
           </div>
         </div>
       </div>
 
-
       {/* Product Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 mx-auto w-fit lg:grid-cols-3 xl:grid-cols-4 mt-10 gap-6">
         {paginatedProducts.map((product, index) => (
-        <Card
-        id={product._id}
-        key={index}
-        image={product.imageUrl}
-        label={product.discountPercentage}
-        title={product.title}
-        description={product.description}
-        new_price={product.price}
-        new_product={product.isNew}
-      />
+          <Card
+            id={product._id}
+            key={index}
+            image={product.imageUrl}
+            label={product.discountPercentage}
+            title={product.title}
+            description={product.description}
+            new_price={product.price}
+            new_product={product.isNew}
+          />
         ))}
       </div>
 
@@ -178,15 +198,14 @@ function ShopProducts() {
             key={index}
             onClick={() => handlePageChange(index + 1)}
             className={`px-4 py-2 rounded ${currentPage === index + 1
-                ? 'bg-[#B88E2F] text-white'
-                : 'bg-gray-200 hover:bg-gray-300'
+              ? 'bg-[#B88E2F] text-white'
+              : 'bg-gray-200 hover:bg-gray-300'
               }`}
           >
             {index + 1}
           </button>
         ))}
       </div>
-
     </div>
   );
 }
