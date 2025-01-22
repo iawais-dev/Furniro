@@ -1,5 +1,6 @@
 // app/layout.tsx
 import { CartProvider } from '@/contexts/CartContext';
+import { LikeProvider } from '@/contexts/LikeContext'; // Import the LikeProvider
 import { Poppins } from 'next/font/google';
 import './globals.css';
 
@@ -16,12 +17,14 @@ export default function RootLayout({
 }) {
   return (
     <CartProvider>
-      <html lang="en">
-        <head />
-        <body className={`${poppins.variable} antialiased`}>
-          {children}
-        </body>
-      </html>
+      <LikeProvider> 
+        <html lang="en">
+          <head />
+          <body className={`${poppins.variable} antialiased`}>
+            {children}
+          </body>
+        </html>
+      </LikeProvider>
     </CartProvider>
   );
 }

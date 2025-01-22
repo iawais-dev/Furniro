@@ -1,0 +1,6 @@
+Test Case ID,Test Case Description,Test Steps,Expected Result,Actual Result,Severity Level,Assigned TO,Remarks
+1,Validate product listing page,Open homepage > navigate to shop ,Products Display Successfully ,Products Display Successfully ,Low,--,No issue Found
+2,Check cart functionaliy,Add to cart >navigate to cart,Products Display on Cart,Products Display on Cart,Medium,--,No issue Found
+3,Validate dynamic product detail pages,Open product page > click any product,Open Dynamic Product Detail Pages,Open Dynamic Product Detail Pages,Medium,--,No issue Found
+4,Ensure responsiveness on mobile,Inspect > device toolbar > mobile device,Responsive Design on all screen size,Responsive Design on all screen size,Medium,--,Works fine
+5,Cross Browsing,Open website on different browser,Works correctly on every browser,Works correctly on every browser,low,--,No issue Found

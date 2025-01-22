@@ -2,8 +2,6 @@
 import Image from "next/image";
 import cart from '@/assets/imgs/cart.svg'
 import heart from '@/assets/imgs/heart.svg'
-import profile from '@/assets/imgs/profile.svg'
-import search from '@/assets/imgs/search.svg'
 import logo from '@/assets/imgs/logo.png'
 import { useState } from "react";
 import { RiMenu3Fill } from "react-icons/ri";
@@ -38,9 +36,7 @@ export default function Navbar() {
            <Link href='/contact'><li className="hover:hover:scale-105 cursor-pointer">Contact</li></Link>
           </ul>
           <div className="flex gap-10">
-            <Image src={profile} className="w-[23px]" alt="profile" />
-            <Image src={search} className="w-[23px]" alt="search" />
-            <Image src={heart} className="w-[23px]" alt="heart" />
+            <Link href='/like'> <Image src={heart} className="w-[23px]" alt="heart" /></Link>
            <Link href='/cart'> <Image src={cart} className="w-[23px]" alt="cart" /></Link>
           </div>
         </div>
@@ -54,8 +50,6 @@ export default function Navbar() {
           </div>
           {/* menu icon */}    
           <div className="flex items-center gap-4">
-               <Image src={search} className="w-[20px]" alt="search" />
-               <Image src={cart} onClick={handleCart} className="w-[20px]" alt="cart" />
           <RiMenu3Fill size={20} className="" onClick={handleMenu}/>
           </div>
          
@@ -69,8 +63,7 @@ export default function Navbar() {
            <Link href='/contact'><li className="hover:hover:scale-105 cursor-pointer">Contact</li></Link>
           </ul>
           <div className="flex w-fit mt-10 mx-auto  gap-10">
-            <Image src={profile} className="w-[20px]" alt="profile" />
-            <Image src={heart} className="w-[20px]" alt="heart" />
+            <Link href='/like'> <Image src={heart} className="w-[20px]" alt="heart" /></Link>
             <Link href='/cart'> <Image src={cart} className="w-[20px]" alt="cart" /> </Link>
           </div> </div>: null
           }
