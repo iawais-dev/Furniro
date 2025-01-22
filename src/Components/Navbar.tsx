@@ -10,14 +10,10 @@ import Link from "next/link";
 
 export default function Navbar() {
     const[menu,setMenu]= useState(false)
-    const[Cart,setCart]= useState(false)
     
     // handler
     const handleMenu = ()=>{
         setMenu(!menu)
-    }
-    const handleCart=()=>{
-        setCart(!Cart)
     }
 
     return (
